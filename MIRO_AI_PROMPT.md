@@ -64,17 +64,54 @@ Show connections: Clients → API → Backend → External Services. Use color c
 
 ---
 
-## For Data Flow Diagram:
+## For Complete Data Flow Diagram (Based on My First Board):
 
 ```
-Create a data flow diagram showing:
-1. User logs into Mobile App
-2. Creates observation: Capture Photo → Get GPS → Fill Form → Save to SQLite
-3. Network check: If offline → Queue for Sync, If online → Sync Engine
-4. Sync: Upload Photos to S3 → Create DB Record → Update Local Status
-5. Web Admin: Load Data → Review → Approve/Reject → Update Status → Notify Mobile
-6. Mobile: Receive Status Update → Update Local SQLite
+Create a comprehensive data flow diagram for Tree Observation App:
 
-Use decision diamonds for Network Available and Approve/Reject. Use rectangles for processes, cylinders for databases. Color code: Blue (Mobile processes), Green (Backend), Cyan (Web), Purple (Storage).
+START (Green Oval) → Mobile App (Yellow Rectangle)
+
+From Mobile App, create 3 main paths:
+
+PATH 1 - AUTHENTICATION (Upward):
+Mobile App → "Login" → JWT Token → "Authentication" → RLS Policies → "Security" → Role Check → "Access control" → Web Admin
+
+PATH 2 - DATA COLLECTION (Rightward):
+Mobile App → "Tree observations" → SQLite DB (Local Cache) → "Local cache" → Network Available? (Blue Diamond Decision)
+  - If NO: Network Available? → "Wait for Network" → Queue for Sync → Loop back to Network Available?
+  - If YES: Network Available? → Sync Engine → "Process queue" → PostgreSQL + PostGIS (Data Storage)
+
+PATH 3 - PHOTO CAPTURE (Downward):
+Mobile App → "Photo capture" → FileSystem (Local Storage) → "Local storage" → Upload → "Photo sync" → S3 Storage (Cloud Storage) → "Cloud storage" → Gallery View → "Review photos" → Web Admin
+
+ADDITIONAL FLOWS:
+- FileSystem → "GPS location" → Cached Maps → "Offline maps" → Validation → "Coordinate check" → PostGIS → "Spatial data" → Map Dashboard → "Visualize" → Heatmaps → "Density analysis" → END
+- PostgreSQL + PostGIS → "Data storage" → Web Admin
+- Web Admin → "Review data" → Analytics → "Reports" → END (Green Oval)
+
+SHAPES:
+- Green Ovals: Start and End nodes
+- Yellow Rectangles: All processes and components
+- Blue Diamond: Decision point (Network Available?)
+- Cylinders: Databases (SQLite DB, PostgreSQL + PostGIS, S3 Storage)
+
+CONNECTIONS:
+- Label all arrows clearly (Start, Login, Tree observations, Photo capture, Local cache, Authentication, Security, Access control, Local storage, Photo sync, Cloud storage, Review photos, GPS location, Offline maps, Coordinate check, Spatial data, Visualize, Density analysis, Data storage, Review data, Reports, Wait for Network, Process queue)
+- Show loop from Queue for Sync back to Network Available?
+
+LAYOUT:
+- Start at top left
+- Mobile App in center left
+- Authentication flow goes upward
+- Data collection flows rightward
+- Photo capture flows downward
+- Web Admin in center right
+- End at bottom right
+
+COLORS:
+- Green: Start/End nodes
+- Yellow: All process boxes
+- Blue: Decision diamonds
+- Use different shades for different component types
 ```
 

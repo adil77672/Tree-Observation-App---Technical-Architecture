@@ -19,27 +19,27 @@ graph TB
             end
             
             subgraph MobileMap["🗺️ Mapping & Location"]
-                MapboxNative[@rnmapbox/maps]
-                ExpoLocation[expo-location]
+                MapboxNative["Mapbox GL Native<br/>@rnmapbox/maps"]
+                ExpoLocation["expo-location"]
                 OfflineTiles[Offline Tile Cache]
                 GeoJSON[GeoJSON Renderer]
             end
             
             subgraph MobileMedia["📸 Media Handling"]
-                ImagePicker[expo-image-picker]
-                Camera[expo-camera]
+                ImagePicker["expo-image-picker"]
+                Camera["expo-camera"]
                 ImageCompress[Image Compression]
             end
             
             subgraph MobileStorage["💾 Local Storage"]
-                SQLite[SQLite Database<br/>expo-sqlite]
-                AsyncStorage[AsyncStorage<br/>Key-Value Store]
-                FileSystem[Expo FileSystem<br/>Photo Storage]
+                SQLite["SQLite Database<br/>expo-sqlite"]
+                AsyncStorage["AsyncStorage<br/>Key-Value Store"]
+                FileSystem["Expo FileSystem<br/>Photo Storage"]
             end
             
             subgraph MobileSync["🔄 Sync Engine"]
                 SyncQueue[Sync Queue Manager]
-                BackgroundTask[expo-task-manager]
+                BackgroundTask["expo-task-manager"]
                 NetworkDetect[Network Detection]
                 ConflictResolve[Conflict Resolution]
             end
@@ -77,8 +77,8 @@ graph TB
             end
             
             subgraph WebMap["🗺️ Map Components"]
-                MapboxJS[mapbox-gl]
-                ReactMapGL[react-map-gl]
+                MapboxJS["mapbox-gl"]
+                ReactMapGL["react-map-gl"]
                 Clustering[Marker Clustering]
                 InteractiveMarkers[Interactive Markers]
             end
@@ -104,7 +104,7 @@ graph TB
             SupabaseAuth[Supabase Auth]
             JWT[JWT Token Management]
             EmailPassword[Email/Password Auth]
-            RoleBased[Role-based Access Control]
+            RoleBased["Role-based Access Control"]
             SessionMgmt[Session Management]
         end
         
@@ -127,22 +127,22 @@ graph TB
             
             subgraph Indexes["🔍 Indexes"]
                 SpatialIndex[GIST Spatial Index]
-                BTreeIndexes[B-Tree Indexes]
+                BTreeIndexes["B-Tree Indexes"]
                 CompositeIndexes[Composite Indexes]
             end
         end
         
         subgraph Storage["📁 Storage Service"]
-            SupabaseStorage[S3-compatible Storage]
-            PhotoBucket[observation-photos Bucket]
+            SupabaseStorage["S3-compatible Storage"]
+            PhotoBucket["observation-photos Bucket"]
             ThumbnailBucket[thumbnails Bucket]
             RLSStorage[Storage RLS Policies]
-            SignedURLs[Short-lived Signed URLs]
+            SignedURLs["Short-lived Signed URLs"]
         end
         
         subgraph API["⚡ API Services"]
             PostgREST[PostgREST<br/>Auto-generated REST API]
-            ODataFilter[OData-like Filtering]
+            ODataFilter["OData-like Filtering"]
             JWTValidation[JWT Validation]
             AutoCRUD[Auto CRUD Operations]
         end
